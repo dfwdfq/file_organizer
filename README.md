@@ -12,12 +12,24 @@ A lightweight, efficient command-line utility written in C that organizes clutte
 
 Currently, the organizer supports the following mappings out-of-the-box:
 
-| Extension | Target Folder |
+| Category | Extensions |
 | :--- | :--- |
-| `.pdf` | Documents |
-| `.jpg`, `.png` | Images |
-| `.mp4` | Videos |
-| `.c` | Code |
+| **Documents** | `.pdf`, `.docx`, `.doc`, `.txt`, `.pptx`, `.ppt`, `.xlsx`, `.xls`, `.csv`, `.json`, `.yaml`, `.xml`, `.epub`, `.mobi`, `.ttf`, `.woff`, `.otf` |
+| **Images** | `.jpg`, `.jpeg`, `.png`, `.gif`, `.svg`, `.webp`, `.bmp`, `.ico`, `.tiff`, `.tif`, `.eps` |
+| **Videos** | `.mp4`, `.mkv`, `.avi`, `.mov`, `.wmv`, `.flv`, `.webm`, `.m4v` |
+| **Music** | `.mp3`, `.wav`, `.flac`, `.m4a`, `.ogg`, `.aac`, `.wma` |
+| **Code** | `.c`, `.cpp`, `.h`, `.py`, `.js`, `.ts`, `.java`, `.go`, `.rs`, `.php`, `.html`, `.css`, `.sql` |
+| **Archives** | `.zip`, `.tar`, `.rar`, `.7z`, `.gz`, `.bz2`, `.iso`, `.dmg` |
+| **Executables** | `.exe`, `.sh`, `.bat`, `.msi` |
+
+##  Project Structure
+
+- `main.c`: Entry point and command-line argument handling.
+- `file_utils.c`: Handles directory traversal and file movement.
+- `hashmap_services.c`: Manages the extension-to-folder mapping using `uthash`.
+- `extensions.c`: Defines the default list of extensions and their target folders.
+- `include.h`: Header file containing constants and struct definitions.
+- `compile`: A script to compile the project.
 
 ##  Prerequisites
 
