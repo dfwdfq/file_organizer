@@ -86,3 +86,5 @@ struct Mapping defaults[] = {
     {"bat", "Executables"},
     {"msi", "Executables"}
 };
+
+size_t defaults_size = sizeof(defaults)/sizeof(defaults[0]);
