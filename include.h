@@ -1,5 +1,5 @@
 #pragma once
-#include <uthash/src/uthash.h>
+#include"uthash.h"
 #include <stdio.h>
 struct Mapping {
     char ext[10];       // key
