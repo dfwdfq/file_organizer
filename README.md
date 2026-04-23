@@ -61,6 +61,32 @@ struct Mapping defaults[] = {
 
 You can modify this file and recompile to customize your organization logic.
 
+##  How to Add More Extensions
+
+Contributors can easily expand the organizer's capabilities by following these steps:
+
+1.  **Locate `extensions.c`**: This is where the core mapping between file extensions and destination folders resides.
+2.  **Update the `defaults` array**: Add a new entry to the `defaults` struct array. Each entry follows this format:
+    ```c
+    {"extension", "DestinationFolder"}
+    ```
+    *   **Extension**: The file extension (without the dot, e.g., `"pdf"`, `"mp3"`). Max length is 10 characters.
+    *   **DestinationFolder**: The name of the folder where these files should be moved (e.g., `"Documents"`, `"Music"`). Max length is 20 characters.
+
+    **Example**:
+    ```c
+    struct Mapping defaults[] = {
+        {"pdf", "Documents"},
+        {"mp3", "Music"},      // Added New Extension
+        // ... other entries
+    };
+    ```
+
+3.  **Recompile**: After editing the file, run the compilation script to apply your changes:
+    ```bash
+    ./compile
+    ```
+
 ## 📄 License
 
 This project is open-source. Feel free to use and modify it!
