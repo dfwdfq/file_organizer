@@ -17,12 +17,12 @@ RETURN read_config_file(const char*path){
   FILE* fp = fopen(path,"r");
   if(!fp)
     {
-      fprintf("failed to read config file:%s!\n");
+      fprintf(stderr,"failed to read config file:%s!\n");
       return FAIL;
     }
 
   char buf[256];
-  while(fgets(line, sizeof(line), file))
+  while(fgets(buf, sizeof(buf), fp))
     {
       
     }
@@ -30,3 +30,4 @@ RETURN read_config_file(const char*path){
   fclose(fp);
 
 }
+
