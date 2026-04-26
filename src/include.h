@@ -5,6 +5,9 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <stddef.h>
+#include <stdbool.h>
+#include <wordexp.h>
+#include <unistd.h>
 #include <ctype.h>
 #include"uthash.h"
 
@@ -28,4 +31,7 @@ extern size_t defaults_size;
 extern RETURN build_extension_folder_hashmap();
 extern char* get_folder(char* ext);
 extern void organize(char* path);
+
+extern char* expand_config_path(const char* path);
+extern RETURN read_config_file(const char*path);
 #endif

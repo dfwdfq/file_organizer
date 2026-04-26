@@ -1,4 +1,3 @@
-
 #include <string.h>
 #include "include.h"
 
@@ -12,6 +11,15 @@ int main(int argc , char** argv) {
       fprintf(stderr,"Usage ./organize {Folder path to organize}\n");
         return EXIT_FAILURE;
     }
+
+    //read config
+    char* config_path = expand_config_path("~/.config/file_organizer/config.ini");
+    if(access(config_path, F_OK | R_OK) == 0)
+      {
+	//read config, otherwise use default mapping
+      }
+
+
     char* path = argv[1];
     // build the extension to folder hashmap
     RETURN ret = build_extension_folder_hashmap();
