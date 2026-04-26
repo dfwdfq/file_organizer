@@ -13,12 +13,18 @@ int main(int argc , char** argv) {
     }
 
     //read config
-    char* config_path = expand_config_path("~/.config/file_organizer/config.ini");
+    char* config_path = expand_config_path("~/.config/file-organizer/config.ini");
     if(access(config_path, F_OK | R_OK) == 0)
-      {
-	//read config, otherwise use default mapping
+      {       
+	if(read_config_file(config_path) != SUCCESS)
+	  {
+	    //failed to read file
+	  }
       }
-
+    else
+      {
+	//can't access file
+      }
 
     char* path = argv[1];
     // build the extension to folder hashmap
@@ -39,5 +45,7 @@ int main(int argc , char** argv) {
     }
     // pick every file and move it into respective folders
     organize(path);
+
+    free(config);
     return EXIT_SUCCESS;
 }
