@@ -131,7 +131,7 @@ RETURN read_config_file(const char*path){
     }
 
   fclose(fp);
-
+  return SUCCESS;
 }
 void free_config(void)
 {
