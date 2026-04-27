@@ -38,6 +38,7 @@ extern struct Config* config;
 extern size_t config_size;
 
 extern RETURN build_extension_folder_hashmap();
+extern RETURN build_extension_folder_hashmap_from_config();
 extern char* get_folder(char* ext);
 extern void organize(char* path);
 
