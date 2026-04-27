@@ -12,6 +12,7 @@ int main(int argc , char** argv) {
         return EXIT_FAILURE;
     }
 
+    bool use_config = false;
     //read config
     char* config_path = expand_config_path("~/.config/file-organizer/config.ini");
     if(access(config_path, F_OK | R_OK) == 0)
@@ -20,6 +21,7 @@ int main(int argc , char** argv) {
 	  {
 	    fprintf(stderr,"failed to read config! fallback to defaults...");
 	  }
+	else use_config = true;
       }
     else
       {
@@ -29,7 +31,14 @@ int main(int argc , char** argv) {
 
     char* path = argv[1];
     // build the extension to folder hashmap
-    RETURN ret = build_extension_folder_hashmap();
+    RETURN ret = use_config? build_extension_folder_hashmap_from_config():
+      build_extension_folder_hashmap();
+
+    if(use_config)
+    {
+    	free_config();
+    }
+    
     switch(ret){
     case SUCCESS :
       fprintf(stderr,"HashMap Build Success\n");
