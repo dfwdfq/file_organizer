@@ -43,4 +43,5 @@ extern void organize(char* path);
 
 extern char* expand_config_path(const char* path);
 extern RETURN read_config_file(const char*path);
+extern void free_config(void);
 #endif

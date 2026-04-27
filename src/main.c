@@ -47,6 +47,7 @@ int main(int argc , char** argv) {
     // pick every file and move it into respective folders
     organize(path);
 
-    free(config);
+    
+    free_config();
     return EXIT_SUCCESS;
 }

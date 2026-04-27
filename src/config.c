@@ -133,4 +133,21 @@ RETURN read_config_file(const char*path){
   fclose(fp);
 
 }
+void free_config(void)
+{
+  if(config == NULL) return;
 
+  for (size_t i = 0; i < config_size; i++)
+    {
+      if (config[i].dir[0] == '\0') break;
+      
+      for (int j = 0; j < 20 && config[i].exts[j] != NULL; j++)
+	{
+	  free(config[i].exts[j]);
+	}
+    }
+  
+  free(config);
+  config = NULL;
+  config_size = 0;
+}
