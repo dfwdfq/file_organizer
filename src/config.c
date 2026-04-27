@@ -28,23 +28,6 @@ int _read_dir_name(char* dir_name, char* buffer){
   dir_name[pos] = '\0';
   return pos;
 }
-int read_ext(char* ext, char*buffer){
-  int pos = 0;
-  while(buffer[pos] != '\0')
-    {
-      if(isspace(buffer[pos])) continue;
-      if(buffer[pos] == ',')
-	{
-	  buffer[pos] = '\0';
-	  return pos;
-	}
-      
-      ext[pos] = buffer[pos];
-      ++pos;
-    }
-  return -2;
-}
-
 RETURN read_config_file(const char*path){
   FILE* fp = fopen(path,"r");
   if(!fp)
@@ -105,10 +88,46 @@ RETURN read_config_file(const char*path){
 	}
       if(j > 0) exts[i][j] = '\0';
 
-      /*
-	So, we have directory name and array of extensions
-	TODO: make one-to-many
-      */
+      int actual_ext_count = i + (j > 0 ? 1 : 0);
+      if (actual_ext_count > 20) actual_ext_count = 20;
+      
+      if(current_element >= config_size)
+	{
+	  size_t new_size = config_size* 2;
+	  struct Config* new_config = realloc(config,new_size* sizeof(struct Config));
+	  if(!new_config)
+	    {
+	      perror("realloc failed");
+	      free(exts);
+	      fclose(fp);
+	      return FAIL;
+	    }
+	  config = new_config;
+	  config_size = new_size;
+	}
+
+      strcpy(config[current_element].dir,dir_name);
+      config[current_element].dir[sizeof(config[current_element].dir) - 1] = '\0';
+
+      for(int k = 0; k< actual_ext_count; k++)
+	{
+	  config[current_element].exts[k] = strdup(exts[k]);
+	  if(!config[current_element].exts[k])
+	    {
+	      perror("strdup failed");
+	      for (int m = 0; m < k; m++) free(config[current_element].exts[m]);
+	      free(exts);
+	      fclose(fp);
+	      return FAIL;
+	    }	
+	}
+      for (int k = actual_ext_count; k < 20; k++)
+	{
+            config[current_element].exts[k] = NULL;
+        }
+      free(exts);
+      current_element++;
+      
     }
 
   fclose(fp);
